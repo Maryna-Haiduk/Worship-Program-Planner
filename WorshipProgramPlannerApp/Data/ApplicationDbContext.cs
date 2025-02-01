@@ -13,7 +13,14 @@ namespace WorshipProgramPlannerApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // base.OnModelCreating(modelBuilder);
+
+            // Fluent API configurations(if needed)
+                modelBuilder.Entity<Worship>()
+                    .HasMany(w => w.WorshipPrograms)
+                    .WithOne(wp => wp.Worship)
+                    .HasForeignKey(wp => wp.WorshipId)
+                    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
