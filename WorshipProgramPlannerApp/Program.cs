@@ -1,3 +1,6 @@
+using WorshipProgramPlannerApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace WorshipProgramPlannerApp
 {
     public class Program
@@ -5,6 +8,9 @@ namespace WorshipProgramPlannerApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
