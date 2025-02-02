@@ -1,5 +1,6 @@
 using WorshipProgramPlannerApp.Data;
 using Microsoft.EntityFrameworkCore;
+using WorshipProgramPlannerApp.Repositories;
 
 namespace WorshipProgramPlannerApp
 {
@@ -11,6 +12,10 @@ namespace WorshipProgramPlannerApp
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IWorshipRepository, WorshipRepository>();
+            builder.Services.AddScoped<IWorshipProgramRepository, WorshipProgramRepository>();
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
