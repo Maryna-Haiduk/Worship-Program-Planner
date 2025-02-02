@@ -32,12 +32,17 @@ namespace WorshipProgramPlannerApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Worship worship)
         {
+            if (worship != null)
+            {
+                Console.WriteLine($"Worship Name: {worship.WorshipName}, Date: {worship.WorshipDate}");
+            }
             if (ModelState.IsValid)
             {
                 _worshipRepository.Add(worship);
-                _worshipRepository.SaveChanges();
+                _worshipRepository.SaveChanges(); // This is required to persist changes in the database
                 return RedirectToAction(nameof(Index));
             }
             return View(worship);

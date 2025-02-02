@@ -16,11 +16,16 @@ namespace WorshipProgramPlannerApp.Data
             // base.OnModelCreating(modelBuilder);
 
             // Fluent API configurations(if needed)
-                modelBuilder.Entity<Worship>()
+            modelBuilder.Entity<Worship>()
                     .HasMany(w => w.WorshipPrograms)
                     .WithOne(wp => wp.Worship)
                     .HasForeignKey(wp => wp.WorshipId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<Worship>()
+                    .Property(w => w.WorshipId)
+                    .ValueGeneratedOnAdd(); // Ensures auto-incrementing behavior
         }
     }
 }
