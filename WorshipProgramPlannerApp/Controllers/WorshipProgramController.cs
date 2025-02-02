@@ -14,7 +14,7 @@ namespace WorshipProgramPlanner.Controllers
             _worshipProgramRepository = worshipProgramRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult ListOfPrograms()
         {
             var worshipPrograms = _worshipProgramRepository.GetAll();
             return View(worshipPrograms);

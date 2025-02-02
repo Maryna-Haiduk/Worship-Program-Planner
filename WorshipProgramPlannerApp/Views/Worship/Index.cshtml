@@ -4,12 +4,53 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Музична програма богослужінь</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<br />
+<a asp-action="Create"><button class="btn btn-primary btn-lg" type="button">+ Додати служіння</button></a>
+<br />
+<br />
+@foreach (var worship in Model)
+{
+    <br />
+    <h4>@worship.WorshipDate.ToString("MMMM dd"), @worship.WorshipName</h4>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Виконавець</th>
+                <th>Назва вірша</th>
+                <th>Назва пісні</th>
+                <th>Коментар</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in worship.WorshipPrograms)
+            {
+                <tr>
+                    <td>@item.PerformerName</td>               
+                    <td>@item.PoetryName</td>              
+                    <td>@item.SongName</td>
+                    <td>@item.Comment</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.WorshipId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.WorshipId">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    <button asp-controller="WorshipProgram" asp-action="Create" type="button" class="btn btn-success">Додати вірш або пісню</button>
+    <button asp-controller="WorshipProgram" asp-action="Create" type="button" class="btn btn-outline-success">Додати вірш або пісню</button>
+    <br />
+    <br />
+}
+
+
+<br />
+<br />
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -39,3 +80,4 @@
 }
     </tbody>
 </table>
+ *@
