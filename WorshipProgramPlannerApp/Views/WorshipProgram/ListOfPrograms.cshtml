@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WorshipProgramPlannerApp.DTOs.WorshipProgramDTO>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Performer</th>
+            <th>Poetry</th>
+            <th>Song</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PerformerName</td>
+                    <td>@item.PoetryName ?? "N/A"</td>
+                    <td>@item.SongName ?? "N/A"</td>
+                    <td>@item.Comment ?? "N/A"</td>
+                    <td>
+                        <a asp-controller="WorshipProgram" asp-action="Details" asp-route-id="@item.WorshipProgramId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@item.WorshipProgramId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-controller="WorshipProgram" asp-action="Delete" asp-route-id="@item.WorshipProgramId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No programs available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@* 
+@model IEnumerable<WorshipProgramPlannerApp.Models.WorshipProgram>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PoetryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SongName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Worship)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerformerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PoetryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Worship.WorshipId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.WorshipProgramId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.WorshipProgramId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.WorshipProgramId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@

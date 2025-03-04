@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WorshipProgramPlannerApp.Models.Worship>
+﻿@model IEnumerable<Worship>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,77 +7,43 @@
 <h1>Музична програма богослужінь</h1>
 
 <br />
-<a asp-action="Create"><button class="btn btn-primary btn-lg" type="button">+ Додати служіння</button></a>
+<a asp-action="Create" class="btn btn-primary btn-lg" type="button">+ Додати служіння</a>
 <br />
 <br />
+
 @foreach (var worship in Model)
 {
     <br />
     <h4>@worship.WorshipDate.ToString("MMMM dd"), @worship.WorshipName</h4>
 
-    <table class="table">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Виконавець</th>
-                <th>Назва вірша</th>
-                <th>Назва пісні</th>
-                <th>Коментар</th>
+                <th>Performer</th>
+                <th>Poetry</th>
+                <th>Song</th>
+                <th>Comment</th>
             </tr>
         </thead>
         <tbody>
-            @foreach(var item in worship.WorshipPrograms)
+            @foreach (var program in worship.WorshipPrograms)
             {
                 <tr>
-                    <td>@item.PerformerName</td>               
-                    <td>@item.PoetryName</td>              
-                    <td>@item.SongName</td>
-                    <td>@item.Comment</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.WorshipId">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.WorshipId">Delete</a>
-                    </td>
+                    <td>@program.PerformerName</td>
+                    <td>@program.PoetryName</td>
+                    <td>@program.SongName</td>
+                    <td>@program.Comment</td>
                 </tr>
             }
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
-    <button asp-controller="WorshipProgram" asp-action="Create" type="button" class="btn btn-success">Додати вірш або пісню</button>
-    <button asp-controller="WorshipProgram" asp-action="Create" type="button" class="btn btn-outline-success">Додати вірш або пісню</button>
+    <a asp-controller="WorshipProgram" asp-action="Create" asp-route-worshipId="@worship.WorshipId">
+        <button type="button" class="btn btn-outline-success">Додати вірш або пісню</button>
+    </a>
+
     <br />
     <br />
 }
-
-
 <br />
 <br />
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WorshipDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorshipName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorshipDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorshipName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WorshipId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WorshipId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WorshipId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
- *@

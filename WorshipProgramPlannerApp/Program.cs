@@ -10,8 +10,9 @@ namespace WorshipProgramPlannerApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options
+    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .UseLazyLoadingProxies());
 
             builder.Services.AddScoped<IWorshipRepository, WorshipRepository>();
             builder.Services.AddScoped<IWorshipProgramRepository, WorshipProgramRepository>();

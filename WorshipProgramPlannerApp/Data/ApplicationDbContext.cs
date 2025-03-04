@@ -26,6 +26,25 @@ namespace WorshipProgramPlannerApp.Data
             modelBuilder.Entity<Worship>()
                     .Property(w => w.WorshipId)
                     .ValueGeneratedOnAdd(); // Ensures auto-incrementing behavior
+            
+            modelBuilder.Entity<WorshipProgram>()
+                    .Property(w => w.WorshipProgramId)
+                    .ValueGeneratedOnAdd(); // Ensures auto-incrementing behavior
+
+        }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseLazyLoadingProxies(); // Enable Lazy Loading
+        //    base.OnConfiguring(optionsBuilder);
+        //}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseLazyLoadingProxies(); // Enable Lazy Loading
+            }
         }
     }
 }

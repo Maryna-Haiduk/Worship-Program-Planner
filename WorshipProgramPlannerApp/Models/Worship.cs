@@ -12,6 +12,6 @@ namespace WorshipProgramPlannerApp.Models
         [DisplayFormat(DataFormatString = "{0:MMMM dd}", ApplyFormatInEditMode = true)]
         public DateTime WorshipDate { get; set; } = DateTime.Now;
         public string? WorshipName { get; set; }
-        public ICollection<WorshipProgram> WorshipPrograms { get; set; } = new List<WorshipProgram>();
+        public virtual ICollection<WorshipProgram> WorshipPrograms { get; set; } = new List<WorshipProgram>();
     }
 }

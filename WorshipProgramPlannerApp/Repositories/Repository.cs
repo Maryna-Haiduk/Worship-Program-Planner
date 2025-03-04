@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using WorshipProgramPlannerApp.Data;
+using WorshipProgramPlannerApp.Models;
 
 namespace WorshipProgramPlannerApp.Repositories
 {

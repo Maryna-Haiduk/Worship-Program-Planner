@@ -1,21 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using WorshipProgramPlannerApp.Models;
 
-namespace WorshipProgramPlannerApp.Models
+namespace WorshipProgramPlannerApp.DTOs
 {
-    public class WorshipProgram
+    public class WorshipProgramDTO
     {
-        [Key]
         public int WorshipProgramId { get; set; }
+
+        [Required(ErrorMessage = "Performer name is required.")]
         public string PerformerName { get; set; }
+
         public string? PoetryName { get; set; }
+
         public string? SongName { get; set; }
+
         public string? Comment { get; set; }
 
-        // Foreign Key
+        [Required(ErrorMessage = "Worship ID is required.")]
         public int WorshipId { get; set; }
-
-        [BindNever]
-        public virtual Worship Worship { get; set; }
     }
 }
