@@ -29,20 +29,36 @@ namespace WorshipProgramPlannerApp.Controllers
             return View(worships);
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             var worship = _worshipRepository.GetById(id);
-            if (worship == null) return NotFound();
-            return View(worship);
-        }
+            if (worship == null)
+            {
+                return NotFound();
+            }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
             _worshipRepository.Delete(id);
-            _worshipRepository.SaveChanges();
+            _worshipRepository.SaveChanges(); // Persist the changes
+
             return RedirectToAction(nameof(Index));
         }
+
+
+        //public IActionResult Delete(int id)
+        //{
+        //    var worship = _worshipRepository.GetById(id);
+        //    if (worship == null) return NotFound();
+        //    return View(worship);
+        //}
+
+        //[HttpPost, ActionName("Delete")]
+        //public IActionResult DeleteConfirmed(int id)
+        //{
+        //    _worshipRepository.Delete(id);
+        //    _worshipRepository.SaveChanges();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         public IActionResult Details(int id)
         {
