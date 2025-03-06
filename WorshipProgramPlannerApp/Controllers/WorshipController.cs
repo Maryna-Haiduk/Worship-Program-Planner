@@ -18,7 +18,30 @@ namespace WorshipProgramPlannerApp.Controllers
         public IActionResult Index()
         {
             var worships = _worshipRepository.GetAll();
+            var worshipsDtos = worships.Select(c => new WorshipDTO() 
+            { 
+                WorshipName = c.WorshipName, 
+                WorshipDate = c.WorshipDate,
+                WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO() { Comment = v.Comment, 
+                    PerformerName = v.PerformerName, PoetryName = v.PoetryName, SongName = v.SongName}).ToList()
+            });
+            
             return View(worships);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var worship = _worshipRepository.GetById(id);
+            if (worship == null) return NotFound();
+            return View(worship);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _worshipRepository.Delete(id);
+            _worshipRepository.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Details(int id)
@@ -71,19 +94,6 @@ namespace WorshipProgramPlannerApp.Controllers
             return View(worship);
         }
 
-        public IActionResult Delete(int id)
-        {
-            var worship = _worshipRepository.GetById(id);
-            if (worship == null) return NotFound();
-            return View(worship);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            _worshipRepository.Delete(id);
-            _worshipRepository.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
+       
     }
 }
