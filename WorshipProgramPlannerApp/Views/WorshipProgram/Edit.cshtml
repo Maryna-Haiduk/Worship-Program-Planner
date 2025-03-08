@@ -1,0 +1,42 @@
+﻿@model WorshipProgramPlannerApp.DTOs.WorshipProgramDTO
+
+@{
+    ViewData["Title"] = "Edit Worship Program";
+}
+
+<h2>Укажите изменения: </h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+<form asp-controller="WorshipProgram" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="WorshipProgramId" />
+    <input type="hidden" asp-for="WorshipId" />
+
+    <div class="form-group">
+                <label asp-for="PerformerName"><b>Испонитель</b></label>
+        <input asp-for="PerformerName" class="form-control" required />
+    </div>
+    <br />
+    <div class="form-group">
+                <label asp-for="SongName"><b>Название песни</b></label>
+        <input asp-for="SongName" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+                <label asp-for="PoetryName"><b>Название стихотворения</b></label>
+        <input asp-for="PoetryName" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+                <label asp-for="Comment"><b>Комментарий</b></label>
+        <textarea asp-for="Comment" class="form-control"></textarea>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
+    <a asp-controller="Worship" asp-action="Index" class="btn btn-outline-dark">Отменить</a>
+</form>
+    </div>
+</div>

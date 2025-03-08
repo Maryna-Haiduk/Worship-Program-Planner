@@ -4,26 +4,26 @@
     ViewData["Title"] = "Create Worship";
 }
 
-<h2>Добавление нового богослужения в список</h2>
+<h2>Добавление богослужения в список</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="WorshipDate" class="control-label">Укажите дату:</label>
+                <label asp-for="WorshipDate" class="control-label"><b>Укажите дату:</b></label>
                 <input asp-for="WorshipDate" class="form-control" />
                 <span asp-validation-for="WorshipDate" class="text-danger"></span>
             </div>
             <br/>
             <div class="form-group">
-                <label asp-for="WorshipName" class="control-label">Напишите название служения</label>
+                <label asp-for="WorshipName" class="control-label"><b>Напишите название служения</b></label>
                 <input asp-for="WorshipName" class="form-control" />
                 <span asp-validation-for="WorshipName" class="text-danger"></span>
             </div>
             <br/>
             <div class="form-group">
-                <input asp-action="Create" type="submit" value="Create" class="btn btn-primary" />
+                <input asp-action="Create" type="submit" value="Добавить" class="btn btn-primary" />
             </div>
         </form>
     </div>
