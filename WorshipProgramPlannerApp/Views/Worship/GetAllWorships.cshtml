@@ -5,14 +5,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Музыкальная программа богослужений</h2>
-<h4>Vineland Evangelical Slavic Buptist Church</h4>
-
-<br />
-<a asp-action="Create" class="btn btn-outline-dark btn-lg" type="button">+ Добавить новое богослужение</a>
-<br />
-<br />
-
+<h2>Полный список богослужений: </h2>
+<hr />
 
 @foreach (var worship in Model)
 {
@@ -35,7 +29,7 @@
                     </form>
                 </div>
             </div>
-            </div>        
+        </div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-light">
@@ -69,17 +63,8 @@
                     }
                 </tbody>
             </table>
-            <a asp-controller="WorshipProgram" asp-action="Create" asp-route-worshipId="@worship.WorshipId">
-                <button type="button" class="btn btn-primary"> + Добавить свою песню или стих</button>
-            </a>
         </div>
     </div>
-   
 }
-<br />
-<a asp-action="Create" class="btn btn-outline-dark btn-lg" type="button">+ Добавить новое богослужение</a>
-<br />
-<br />
-<a asp-action="GetAllWorships" type="button">Посмотреть полный список богослужений</a>
 <br />
 <br />

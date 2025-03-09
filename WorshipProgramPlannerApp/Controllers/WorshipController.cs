@@ -14,20 +14,93 @@ namespace WorshipProgramPlannerApp.Controllers
             _worshipRepository = worshipRepository;
         }
 
-
         public IActionResult Index()
         {
-            var worships = _worshipRepository.GetAll();
-            var worshipsDtos = worships.Select(c => new WorshipDTO() 
-            { 
-                WorshipName = c.WorshipName, 
+            var currentDate = DateTime.Today;
+
+            var worships = _worshipRepository.GetAll()
+                .Where(w => w.WorshipDate >= currentDate) // Hide past worships
+                .OrderBy(w => w.WorshipDate) // Sort by date (future first)
+                .ToList();
+
+            var worshipsDtos = worships.Select(c => new WorshipDTO()
+            {
+                WorshipId = c.WorshipId,
+                WorshipName = c.WorshipName,
                 WorshipDate = c.WorshipDate,
-                WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO() { Comment = v.Comment, 
-                    PerformerName = v.PerformerName, PoetryName = v.PoetryName, SongName = v.SongName}).ToList()
-            });
-            
-            return View(worships);
+                WorshipPrograms = c.WorshipPrograms
+                    .Select(v => new WorshipProgramDTO()
+                    {
+                        Comment = v.Comment,
+                        PerformerName = v.PerformerName,
+                        PoetryName = v.PoetryName,
+                        SongName = v.SongName
+                    }).ToList()
+            }).ToList();
+
+            return View(worshipsDtos);
         }
+
+
+        //public IActionResult Index()
+        //{
+        //    var worships = _worshipRepository.GetAll();
+        //    var worshipsDtos = worships.Select(c => new WorshipDTO()
+        //    {
+        //        WorshipName = c.WorshipName,
+        //        WorshipDate = c.WorshipDate,
+        //        WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO()
+        //        {
+        //            Comment = v.Comment,
+        //            PerformerName = v.PerformerName,
+        //            PoetryName = v.PoetryName,
+        //            SongName = v.SongName
+        //        }).ToList()
+        //    });
+
+        //    return View(worships);
+        //}
+
+        //public IActionResult GetAllWorships()
+        //{
+        //    var worships = _worshipRepository.GetAll();
+        //    var worshipsDtos = worships.Select(c => new WorshipDTO()
+        //    {
+        //        WorshipName = c.WorshipName,
+        //        WorshipDate = c.WorshipDate,
+        //        WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO()
+        //        {
+        //            Comment = v.Comment,
+        //            PerformerName = v.PerformerName,
+        //            PoetryName = v.PoetryName,
+        //            SongName = v.SongName
+        //        }).ToList()
+        //    });
+
+        //    return View(worships);
+        //}
+
+        public IActionResult GetAllWorships()
+        {
+            var worships = _worshipRepository.GetAll()
+                .OrderBy(c => c.WorshipDate); // Sorting from oldest to newest
+
+            var worshipsDtos = worships.Select(c => new WorshipDTO()
+            {
+                WorshipName = c.WorshipName,
+                WorshipDate = c.WorshipDate,
+                WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO()
+                {
+                    Comment = v.Comment,
+                    PerformerName = v.PerformerName,
+                    PoetryName = v.PoetryName,
+                    SongName = v.SongName
+                }).ToList()
+            });
+
+            return View(worshipsDtos); // Fixed: passing worshipsDtos to the View
+        }
+
 
         [HttpPost]
         public IActionResult Delete(int id)
