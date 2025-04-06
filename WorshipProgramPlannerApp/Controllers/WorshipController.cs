@@ -34,7 +34,8 @@ namespace WorshipProgramPlannerApp.Controllers
                         Comment = v.Comment,
                         PerformerName = v.PerformerName,
                         PoetryName = v.PoetryName,
-                        SongName = v.SongName
+                        SongName = v.SongName,
+                        WorshipProgramId = v.WorshipProgramId
                     }).ToList()
             }).ToList();
 
@@ -61,28 +62,10 @@ namespace WorshipProgramPlannerApp.Controllers
         //    return View(worships);
         //}
 
-        //public IActionResult GetAllWorships()
-        //{
-        //    var worships = _worshipRepository.GetAll();
-        //    var worshipsDtos = worships.Select(c => new WorshipDTO()
-        //    {
-        //        WorshipName = c.WorshipName,
-        //        WorshipDate = c.WorshipDate,
-        //        WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO()
-        //        {
-        //            Comment = v.Comment,
-        //            PerformerName = v.PerformerName,
-        //            PoetryName = v.PoetryName,
-        //            SongName = v.SongName
-        //        }).ToList()
-        //    });
 
-        //    return View(worships);
-        //}
-
-        public IActionResult GetAllWorships()
+        public IActionResult GetAllWorships(int year)
         {
-            var worships = _worshipRepository.GetAll()
+            var worships = _worshipRepository.GetAll().Where(c => c.WorshipDate.Year == year)
                 .OrderBy(c => c.WorshipDate); // Sorting from oldest to newest
 
             var worshipsDtos = worships.Select(c => new WorshipDTO()
@@ -103,8 +86,16 @@ namespace WorshipProgramPlannerApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string deleteCode)
         {
+            var correctCode = "55555";
+
+            if (deleteCode != correctCode)
+            {
+                ModelState.AddModelError("", "Incorrect deletion code.");
+                return RedirectToAction(nameof(Index));
+            }
+
             var worship = _worshipRepository.GetById(id);
             if (worship == null)
             {
@@ -113,25 +104,9 @@ namespace WorshipProgramPlannerApp.Controllers
 
             _worshipRepository.Delete(id);
             _worshipRepository.SaveChanges(); // Persist the changes
-
+            
             return RedirectToAction(nameof(Index));
         }
-
-
-        //public IActionResult Delete(int id)
-        //{
-        //    var worship = _worshipRepository.GetById(id);
-        //    if (worship == null) return NotFound();
-        //    return View(worship);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeleteConfirmed(int id)
-        //{
-        //    _worshipRepository.Delete(id);
-        //    _worshipRepository.SaveChanges();
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         public IActionResult Details(int id)
         {

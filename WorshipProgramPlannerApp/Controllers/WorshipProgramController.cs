@@ -110,45 +110,20 @@ namespace WorshipProgramPlanner.Controllers
         }
 
 
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(WorshipProgramDTO dto)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var worshipProgram = _worshipProgramRepository.GetById(dto.WorshipProgramId);
-        //        if (worshipProgram == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        worshipProgram.PerformerName = dto.PerformerName;
-        //        worshipProgram.PoetryName = dto.PoetryName;
-        //        worshipProgram.SongName = dto.SongName;
-        //        worshipProgram.Comment = dto.Comment;
-
-        //        _worshipProgramRepository.Update(worshipProgram);
-        //        _worshipProgramRepository.SaveChanges();
-
-        //        return RedirectToAction("Index", "Worship");
-        //    }
-        //    return View(dto);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string deleteCode)
         {
             var worshipProgram = _worshipProgramRepository.GetById(id);
+
             if (worshipProgram == null)
             {
                 return NotFound();
             }
-
+           
             _worshipProgramRepository.Delete(id);
             _worshipProgramRepository.SaveChanges();
+        
 
             return RedirectToAction("Index", "Worship");
         }
