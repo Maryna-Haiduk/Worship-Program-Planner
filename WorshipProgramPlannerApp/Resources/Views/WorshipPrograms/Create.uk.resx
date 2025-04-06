@@ -1,0 +1,6 @@
+﻿namespace WorshipProgramPlannerApp.Resources.Views.WorshipPrograms
+{
+    public class Create
+    {
+    }
+}
