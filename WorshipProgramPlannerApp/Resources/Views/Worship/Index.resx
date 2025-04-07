@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddWorshipButton" xml:space="preserve">
-    <value>Add New Service</value>
+    <value>Add New Worship</value>
   </data>
   <data name="AddWorshipProgramButton" xml:space="preserve">
     <value>Add your song or poetry</value>
@@ -127,7 +127,7 @@
     <value>Comment</value>
   </data>
   <data name="DeleteWorshipConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete this Worship?</value>
+    <value>Are you sure you want to delete this worship?</value>
   </data>
   <data name="DeleteWorshipPromptMessage" xml:space="preserve">
     <value>Enter the deletion code: </value>

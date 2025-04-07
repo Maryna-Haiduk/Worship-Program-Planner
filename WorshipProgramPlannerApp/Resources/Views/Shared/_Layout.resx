@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FooterText" xml:space="preserve">
-    <value>Vineland Slavic Evangelical Baptist Church - Worship Planner</value>
-  </data>
   <data name="Nav_AddWorshipLink" xml:space="preserve">
-    <value>ДОДАТИ СЛУЖІННЯ</value>
+    <value>ADD WORSHIP</value>
   </data>
   <data name="Nav_HomeLink" xml:space="preserve">
-    <value>ГОЛОВНА</value>
+    <value>HOME</value>
   </data>
 </root>

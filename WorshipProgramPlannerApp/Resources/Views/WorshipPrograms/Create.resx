@@ -117,43 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddWorshipButton" xml:space="preserve">
-    <value>Add New Service</value>
+  <data name="AddButtonText" xml:space="preserve">
+    <value>Add</value>
   </data>
-  <data name="AddWorshipProgramButton" xml:space="preserve">
-    <value>Add your song or poetry</value>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back To List</value>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>Comment</value>
+    <comment>Comment</comment>
   </data>
-  <data name="DeleteWorshipConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete this Worship?</value>
-  </data>
-  <data name="DeleteWorshipPromptMessage" xml:space="preserve">
-    <value>Enter the deletion code: </value>
-  </data>
-  <data name="DeleteWorshipProgramButton" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteWPConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete this?</value>
-  </data>
-  <data name="EditWorshipProgramButton" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Performer" xml:space="preserve">
-    <value>Performer</value>
+  <data name="PerformerName" xml:space="preserve">
+    <value>Performer Name</value>
   </data>
   <data name="PoetryName" xml:space="preserve">
     <value>Poetry Name</value>
   </data>
-  <data name="ShowAllWorships" xml:space="preserve">
-    <value>View the full list of services</value>
-  </data>
-  <data name="SiteName" xml:space="preserve">
-    <value>Music Program of Worship Services</value>
-  </data>
   <data name="SongName" xml:space="preserve">
     <value>Song Name</value>
+  </data>
+  <data name="WriteDetails" xml:space="preserve">
+    <value>Write Details:</value>
   </data>
 </root>
