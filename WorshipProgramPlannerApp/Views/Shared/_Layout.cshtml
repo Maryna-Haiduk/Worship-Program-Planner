@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WorshipProgramPlannerApp.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -27,6 +28,23 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- Language Switcher -->
+                <form id="lang-form-en" method="post" action="/Home/SetLanguage" style="display:inline;">
+                    <input type="hidden" name="culture" value="en" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button class="btn btn-link nav-link" type="submit">En</button>
+                </form>
+                <form id="lang-form-ru" method="post" action="/Home/SetLanguage" style="display:inline;">
+                    <input type="hidden" name="culture" value="ru" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button class="btn btn-link nav-link" type="submit">Рус</button>
+                </form>
+                <form id="lang-form-uk" method="post" action="/Home/SetLanguage" style="display:inline;">
+                    <input type="hidden" name="culture" value="uk" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button class="btn btn-link nav-link" type="submit">Укр</button>
+                </form>
             </div>
         </nav>
     </header>
@@ -45,5 +63,18 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+    <script>
+        const forms = document.querySelectorAll("form[id^='lang-form']");
+        forms.forEach(form => {
+            form.addEventListener("submit", function () {
+                const culture = this.querySelector("input[name='culture']").value;
+                localStorage.setItem("preferredCulture", culture);
+            });
+        });
+    </script>
 </body>
 </html>
+
+
