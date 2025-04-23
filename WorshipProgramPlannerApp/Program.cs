@@ -1,3 +1,10 @@
+using WorshipProgramPlannerApp.Data;
+using Microsoft.EntityFrameworkCore;
+using WorshipProgramPlannerApp.Repositories;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+
+
 namespace WorshipProgramPlannerApp
 {
     public class Program
@@ -6,16 +13,47 @@ namespace WorshipProgramPlannerApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            // Add Localization
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            // Register MVC + Localization
+            builder.Services.AddControllersWithViews()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
+
+            // Add EF and repositories
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options
+    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .UseLazyLoadingProxies());
+
+            builder.Services.AddScoped<IWorshipRepository, WorshipRepository>();
+            builder.Services.AddScoped<IWorshipProgramRepository, WorshipProgramRepository>();
 
             var app = builder.Build();
+
+            // Configure Supported Cultures
+            //var supportedCultures = new[] { "en", "ru", "uk" };
+            //var localizationOptions = new RequestLocalizationOptions()
+            //    .SetDefaultCulture("en")
+            //    .AddSupportedCultures(supportedCultures)
+            //    .AddSupportedUICultures(supportedCultures);
+            var supportedCultures = new[] { "en", "ru", "uk" };
+            var localizationOptions = new RequestLocalizationOptions()
+            {
+                DefaultRequestCulture = new RequestCulture("en"),
+                SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList(),
+                SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToList()
+            };
+
+            localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+
+            app.UseRequestLocalization(localizationOptions);
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -26,9 +64,10 @@ namespace WorshipProgramPlannerApp
 
             app.UseAuthorization();
 
+            // Default route
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Worship}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,11 +11,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WorshipProgramPlannerApp.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WorshipProgramPlannerApp</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Worship" asp-action="Index">@Localizer["Nav_HomeLink"]</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,13 +24,27 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Worship" asp-action="Create">@Localizer["Nav_AddWorshipLink"]</a>
                         </li>
                     </ul>
                 </div>
+
+                <!-- Language Switcher -->
+                <form id="lang-form-en" method="post" action="/Home/SetLanguage" style="display:inline;">
+                    <input type="hidden" name="culture" value="en" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button class="btn btn-link nav-link" type="submit">En</button>
+                </form>
+                <form id="lang-form-ru" method="post" action="/Home/SetLanguage" style="display:inline;">
+                    <input type="hidden" name="culture" value="ru" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button class="btn btn-link nav-link" type="submit">Рус</button>
+                </form>
+                <form id="lang-form-uk" method="post" action="/Home/SetLanguage" style="display:inline;">
+                    <input type="hidden" name="culture" value="uk" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button class="btn btn-link nav-link" type="submit">Укр</button>
+                </form>
             </div>
         </nav>
     </header>
@@ -38,12 +56,25 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - WorshipProgramPlannerApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Vineland Slavic Evangelical Baptist Church - Worship Planner
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+@*     <script>
+        const forms = document.querySelectorAll("form[id^='lang-form']");
+        forms.forEach(form => {
+            form.addEventListener("submit", function () {
+                const culture = this.querySelector("input[name='culture']").value;
+                localStorage.setItem("preferredCulture", culture);
+            });
+        });
+    </script> *@
 </body>
 </html>
+
+
