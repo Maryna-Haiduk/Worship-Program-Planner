@@ -32,13 +32,23 @@ namespace WorshipProgramPlannerApp
             var app = builder.Build();
 
             // Configure Supported Cultures
+            //var supportedCultures = new[] { "en", "ru", "uk" };
+            //var localizationOptions = new RequestLocalizationOptions()
+            //    .SetDefaultCulture("en")
+            //    .AddSupportedCultures(supportedCultures)
+            //    .AddSupportedUICultures(supportedCultures);
             var supportedCultures = new[] { "en", "ru", "uk" };
             var localizationOptions = new RequestLocalizationOptions()
-                .SetDefaultCulture("en")
-                .AddSupportedCultures(supportedCultures)
-                .AddSupportedUICultures(supportedCultures);
+            {
+                DefaultRequestCulture = new RequestCulture("en"),
+                SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList(),
+                SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToList()
+            };
+
+            localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 
             app.UseRequestLocalization(localizationOptions);
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

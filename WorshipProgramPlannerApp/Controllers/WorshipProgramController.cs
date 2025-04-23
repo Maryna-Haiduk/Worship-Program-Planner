@@ -56,13 +56,13 @@ namespace WorshipProgramPlanner.Controllers
 
                 _worshipProgramRepository.Add(worshipProgram);
                 _worshipProgramRepository.SaveChanges();
-                return RedirectToAction(nameof(ListOfPrograms));
+               return RedirectToAction(nameof(ListOfPrograms));
             }
             return View(dto);
         }
 
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, string returnUrl)
         {
             var worshipProgram = _worshipProgramRepository.GetById(id);
             if (worshipProgram == null)
@@ -80,13 +80,15 @@ namespace WorshipProgramPlanner.Controllers
                 WorshipId = worshipProgram.WorshipId
             };
 
+            ViewBag.ReturnUrl = returnUrl; // Pass it to the view
+
             return View(dto);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(WorshipProgramDTO dto)
+        public IActionResult Edit(WorshipProgramDTO dto, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +105,12 @@ namespace WorshipProgramPlanner.Controllers
 
                 _worshipProgramRepository.Update(worshipProgram);
                 _worshipProgramRepository.SaveChanges();
+
+                // 👇 Redirect to where the user came from
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
 
                 return RedirectToAction("Index", "Worship");
             }

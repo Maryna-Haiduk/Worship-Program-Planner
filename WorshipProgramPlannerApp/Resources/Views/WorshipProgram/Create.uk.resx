@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddButtonText" xml:space="preserve">
-    <value>Добавить</value>
+    <value>Додати</value>
   </data>
   <data name="BackToList" xml:space="preserve">
-    <value>Вернуться к списку служений</value>
+    <value>Повернутись до переліку служінь</value>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Комментарий</value>
+    <value>Коментар</value>
   </data>
   <data name="PerformerName" xml:space="preserve">
-    <value>Имя исполнителя</value>
+    <value>Виконавець</value>
   </data>
   <data name="PoetryName" xml:space="preserve">
-    <value>Название стиха</value>
+    <value>Назва вірша</value>
   </data>
   <data name="SongName" xml:space="preserve">
-    <value>Название песни</value>
+    <value>Назва пісні</value>
   </data>
   <data name="WriteDetails" xml:space="preserve">
-    <value>Укажите детали, чтобы добавить свой номер: </value>
+    <value>Вкажіть деталі</value>
   </data>
 </root>

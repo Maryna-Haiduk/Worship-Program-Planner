@@ -125,7 +125,6 @@
   </data>
   <data name="Comment" xml:space="preserve">
     <value>Comment</value>
-    <comment>Comment</comment>
   </data>
   <data name="PerformerName" xml:space="preserve">
     <value>Performer Name</value>
@@ -137,6 +136,6 @@
     <value>Song Name</value>
   </data>
   <data name="WriteDetails" xml:space="preserve">
-    <value>Write Details:</value>
+    <value>Write Details</value>
   </data>
 </root>

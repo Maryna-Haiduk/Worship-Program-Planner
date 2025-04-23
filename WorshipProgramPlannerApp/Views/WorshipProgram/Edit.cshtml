@@ -15,6 +15,9 @@
 <form asp-controller="WorshipProgram" asp-action="Edit" method="post">
     <input type="hidden" asp-for="WorshipProgramId" />
     <input type="hidden" asp-for="WorshipId" />
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                
+
 
     <div class="form-group">
                 <label asp-for="PerformerName"><b>@Localizer["PerformerName"]</b></label>

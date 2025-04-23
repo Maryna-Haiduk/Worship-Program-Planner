@@ -10,8 +10,12 @@
     var confirmMessage = Localizer["DeleteWPConfirmationMessage"];
 }
 
-<h2>@Localizer["SiteName"]</h2>
-<h4>Vineland Evangelical Slavic Buptist Church</h4>
+<h1><strong>@Localizer["SiteName"]</strong></h1>
+<h4>Vineland Slavic Evangelical Baptist Church</h4>
+
+@* <img src='https://i.postimg.cc/QtbMkD2G/church.jpg' border='0' class="img-fluid" alt='church' />
+ *@
+<img src='https://i.postimg.cc/wMNg4dPj/vsb-Church.jpg' border='0' class="img-fluid" width="50%" alt='vsb-Church' />
 
 <br />
 <a asp-action="Create" class="btn btn-outline-dark btn-lg" type="button">+ @Localizer["AddWorshipButton"]</a>
@@ -27,7 +31,7 @@
         <div class="container" class="card-header">
             <div class="row">
                 <div class="col-8">
-                    <h4>@worship.WorshipDate.ToString("MMMM dd, yyyy") @worship.WorshipName</h4>
+                    <h4>@worship.WorshipDate.ToString("MMMM dd, yyyy", new System.Globalization.CultureInfo("en")) @worship.WorshipName</h4>
                 </div>
                 <div class="col-4" align="right">
                     <form id="deleteForm-@worship.WorshipId" asp-action="Delete" asp-route-id="@worship.WorshipId" method="post" onsubmit="return confirmDelete(@worship.WorshipId);">
@@ -62,9 +66,12 @@
                             <td>@program.PoetryName</td>
                             <td>@program.Comment</td>
                             <td>
-                                <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@program.WorshipProgramId" class="btn btn-outline-dark btn-sm">
+                                <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@program.WorshipProgramId" asp-route-returnUrl="@Context.Request.Path" class="btn btn-outline-dark btn-sm" >
+                                    ✏️ @Localizer["EditWorshipProgramButton"]</a>
+
+                                @* <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@program.WorshipProgramId" class="btn btn-outline-dark btn-sm">
                                     ✏️ @Localizer["EditWorshipProgramButton"]
-                                </a>
+                                </a> *@
                                 <form asp-controller="WorshipProgram" asp-action="Delete" asp-route-id="@program.WorshipProgramId" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-outline-dark btn-sm" onclick="return confirm('@confirmMessage');">
                                         🗑️ @Localizer["DeleteWorshipProgramButton"]

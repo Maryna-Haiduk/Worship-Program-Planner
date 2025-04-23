@@ -65,7 +65,7 @@
     @await RenderSectionAsync("Scripts", required: false)
 
 
-    <script>
+@*     <script>
         const forms = document.querySelectorAll("form[id^='lang-form']");
         forms.forEach(form => {
             form.addEventListener("submit", function () {
@@ -73,7 +73,7 @@
                 localStorage.setItem("preferredCulture", culture);
             });
         });
-    </script>
+    </script> *@
 </body>
 </html>
 

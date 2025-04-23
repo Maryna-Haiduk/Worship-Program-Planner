@@ -139,7 +139,7 @@
     <value>Вы уверенны, что хотите удалить эту запись?</value>
   </data>
   <data name="EditWorshipProgramButton" xml:space="preserve">
-    <value>Редактировать</value>
+    <value>Изменить</value>
   </data>
   <data name="Performer" xml:space="preserve">
     <value>Исполнитель</value>
