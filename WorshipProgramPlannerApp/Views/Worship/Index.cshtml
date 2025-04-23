@@ -13,8 +13,6 @@
 <h1><strong>@Localizer["SiteName"]</strong></h1>
 <h4>Vineland Slavic Evangelical Baptist Church</h4>
 
-@* <img src='https://i.postimg.cc/QtbMkD2G/church.jpg' border='0' class="img-fluid" alt='church' />
- *@
 <img src='https://i.postimg.cc/wMNg4dPj/vsb-Church.jpg' border='0' class="img-fluid" width="50%" alt='vsb-Church' />
 
 <br />
@@ -95,22 +93,6 @@
 <br />
 <br />
 
-
-@* <script>
-    function confirmDelete(worshipId) {
-        if (!confirm("Are you sure you want to delete this worship?")) {
-            return false;
-        }
-
-        let code = prompt("Enter the deletion code:");
-
-        document.getElementById("deleteCode-" + worshipId).value = code;
-        return true;
-    }
-</script>
-
-        @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
- *@
 <script>
     // Inject localized strings into JavaScript variables
     var confirmMessage = '@Localizer["DeleteWorshipConfirmationMessage"]';

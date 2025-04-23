@@ -33,12 +33,6 @@ namespace WorshipProgramPlannerApp.Data
 
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseLazyLoadingProxies(); // Enable Lazy Loading
-        //    base.OnConfiguring(optionsBuilder);
-        //}
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

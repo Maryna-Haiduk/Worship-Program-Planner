@@ -42,27 +42,6 @@ namespace WorshipProgramPlannerApp.Controllers
             return View(worshipsDtos);
         }
 
-
-        //public IActionResult Index()
-        //{
-        //    var worships = _worshipRepository.GetAll();
-        //    var worshipsDtos = worships.Select(c => new WorshipDTO()
-        //    {
-        //        WorshipName = c.WorshipName,
-        //        WorshipDate = c.WorshipDate,
-        //        WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO()
-        //        {
-        //            Comment = v.Comment,
-        //            PerformerName = v.PerformerName,
-        //            PoetryName = v.PoetryName,
-        //            SongName = v.SongName
-        //        }).ToList()
-        //    });
-
-        //    return View(worships);
-        //}
-
-
         public IActionResult GetAllWorships(int year)
         {
             var worships = _worshipRepository.GetAll().Where(c => c.WorshipDate.Year == year)
