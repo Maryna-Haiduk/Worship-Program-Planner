@@ -1,10 +1,14 @@
-﻿@model WorshipProgramPlannerApp.DTOs.WorshipProgramDTO
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+
+@model WorshipProgramPlannerApp.DTOs.WorshipProgramDTO
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h2>Укажите детали, чтобы добавить свой номер: </h2>
+<h2>@Localizer["WriteDetails"]</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -13,38 +17,38 @@
             <input type="hidden" asp-for="WorshipId" />
 
             <div class="form-group">
-                <label asp-for="PerformerName" class="control-label"><b>Имя исполнителя</b></label>
+                <label asp-for="PerformerName" class="control-label"><b>@Localizer["PerformerName"]</b></label>
                 <input asp-for="PerformerName" class="form-control" />
                 <span asp-validation-for="PerformerName" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <label asp-for="SongName" class="control-label"><b>Название песни</b></label>
+                <label asp-for="SongName" class="control-label"><b>@Localizer["SongName"]</b></label>
                 <input asp-for="SongName" class="form-control" />
                 <span asp-validation-for="SongName" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <label asp-for="PoetryName" class="control-label"><b>Название стиха</b></label>
+                <label asp-for="PoetryName" class="control-label"><b>@Localizer["PoetryName"]</b></label>
                 <input asp-for="PoetryName" class="form-control" />
                 <span asp-validation-for="PoetryName" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <label asp-for="Comment" class="control-label"><b>Комментарий</b></label>
+                <label asp-for="Comment" class="control-label"><b>@Localizer["Comment"]</b></label>
                 <input asp-for="Comment" class="form-control" />
                 <span asp-validation-for="Comment" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Добавить" class="btn btn-primary" />
+                <input type="submit" value="@Localizer["AddButtonText"]" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 <br />
 <div>
-    <a asp-controller="WorshipProgram" asp-action="ListOfPrograms">Вернуться к списку служений</a>
+    <a asp-controller="WorshipProgram" asp-action="ListOfPrograms">@Localizer["BackToList"]</a>
 </div>
 
 @section Scripts {

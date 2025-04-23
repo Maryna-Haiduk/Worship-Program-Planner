@@ -1,10 +1,13 @@
-﻿@model WorshipProgramPlannerApp.DTOs.WorshipProgramDTO
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+@model WorshipProgramPlannerApp.DTOs.WorshipProgramDTO
 
 @{
     ViewData["Title"] = "Edit Worship Program";
 }
 
-<h2>Укажите изменения: </h2>
+<h2>@Localizer["SpecifyChanges"]</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -12,31 +15,34 @@
 <form asp-controller="WorshipProgram" asp-action="Edit" method="post">
     <input type="hidden" asp-for="WorshipProgramId" />
     <input type="hidden" asp-for="WorshipId" />
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                
+
 
     <div class="form-group">
-                <label asp-for="PerformerName"><b>Испонитель</b></label>
+                <label asp-for="PerformerName"><b>@Localizer["PerformerName"]</b></label>
         <input asp-for="PerformerName" class="form-control" required />
     </div>
     <br />
     <div class="form-group">
-                <label asp-for="SongName"><b>Название песни</b></label>
+                <label asp-for="SongName"><b>@Localizer["SongName"]</b></label>
         <input asp-for="SongName" class="form-control" />
     </div>
     <br />
     <div class="form-group">
-                <label asp-for="PoetryName"><b>Название стихотворения</b></label>
+                <label asp-for="PoetryName"><b>@Localizer["PoetryName"]</b></label>
         <input asp-for="PoetryName" class="form-control" />
     </div>
     <br />
     <div class="form-group">
-                <label asp-for="Comment"><b>Комментарий</b></label>
+                <label asp-for="Comment"><b>@Localizer["Comment"]</b></label>
         <textarea asp-for="Comment" class="form-control"></textarea>
     </div>
 
     <br />
 
-    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
-    <a asp-controller="Worship" asp-action="Index" class="btn btn-outline-dark">Отменить</a>
+            <button type="submit" class="btn btn-outline-primary">@Localizer["SaveButtonText"]</button>
+            <a asp-controller="Worship" asp-action="Index" class="btn btn-outline-dark">@Localizer["CancelButtonText"]</a>
 </form>
     </div>
 </div>

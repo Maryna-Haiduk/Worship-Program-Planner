@@ -1,13 +1,24 @@
-﻿@model IEnumerable<WorshipProgramPlannerApp.DTOs.WorshipDTO>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+@model IEnumerable<WorshipProgramPlannerApp.DTOs.WorshipDTO>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Музыкальная программа богослужений</h2>
-<h4>Vineland Evangelical Slavic Buptist Church</h4>
+@{
+    var confirmMessage = Localizer["DeleteWPConfirmationMessage"];
+}
+
+<h1><strong>@Localizer["SiteName"]</strong></h1>
+<h4>Vineland Slavic Evangelical Baptist Church</h4>
+
+@* <img src='https://i.postimg.cc/QtbMkD2G/church.jpg' border='0' class="img-fluid" alt='church' />
+ *@
+<img src='https://i.postimg.cc/wMNg4dPj/vsb-Church.jpg' border='0' class="img-fluid" width="50%" alt='vsb-Church' />
 
 <br />
-<a asp-action="Create" class="btn btn-outline-dark btn-lg" type="button">+ Добавить новое богослужение</a>
+<a asp-action="Create" class="btn btn-outline-dark btn-lg" type="button">+ @Localizer["AddWorshipButton"]</a>
 <br />
 <br />
 
@@ -20,7 +31,7 @@
         <div class="container" class="card-header">
             <div class="row">
                 <div class="col-8">
-                    <h4>@worship.WorshipDate.ToString("MMMM dd, yyyy") @worship.WorshipName</h4>
+                    <h4>@worship.WorshipDate.ToString("MMMM dd, yyyy", new System.Globalization.CultureInfo("en")) @worship.WorshipName</h4>
                 </div>
                 <div class="col-4" align="right">
                     <form id="deleteForm-@worship.WorshipId" asp-action="Delete" asp-route-id="@worship.WorshipId" method="post" onsubmit="return confirmDelete(@worship.WorshipId);">
@@ -39,10 +50,10 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Исполнитель</th>
-                        <th scope="col">Название песни</th>
-                        <th scope="col">Название стихотворения</th>
-                        <th scope="col">Комментарий</th>
+                        <th scope="col">@Localizer["Performer"]</th>
+                        <th scope="col">@Localizer["SongName"]</th>
+                        <th scope="col">@Localizer["PoetryName"]</th>
+                        <th scope="col">@Localizer["Comment"]</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -55,12 +66,15 @@
                             <td>@program.PoetryName</td>
                             <td>@program.Comment</td>
                             <td>
-                                <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@program.WorshipProgramId" class="btn btn-outline-dark btn-sm">
-                                    ✏️ Edit
-                                </a>
+                                <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@program.WorshipProgramId" asp-route-returnUrl="@Context.Request.Path" class="btn btn-outline-dark btn-sm" >
+                                    ✏️ @Localizer["EditWorshipProgramButton"]</a>
+
+                                @* <a asp-controller="WorshipProgram" asp-action="Edit" asp-route-id="@program.WorshipProgramId" class="btn btn-outline-dark btn-sm">
+                                    ✏️ @Localizer["EditWorshipProgramButton"]
+                                </a> *@
                                 <form asp-controller="WorshipProgram" asp-action="Delete" asp-route-id="@program.WorshipProgramId" method="post" style="display:inline;">
-                                    <button type="submit" class="btn btn-outline-dark btn-sm" onclick="return confirm('Are you sure you want to delete this?');">
-                                        🗑️ Delete
+                                    <button type="submit" class="btn btn-outline-dark btn-sm" onclick="return confirm('@confirmMessage');">
+                                        🗑️ @Localizer["DeleteWorshipProgramButton"]
                                     </button>
                                 </form>
                             </td>
@@ -69,20 +83,20 @@
                 </tbody>
             </table>
             <a asp-controller="WorshipProgram" asp-action="Create" asp-route-worshipId="@worship.WorshipId">
-                <button type="button" class="btn btn-warning"> + Добавить свою песню или стих</button>
+                <button type="button" class="btn btn-warning"> + @Localizer["AddWorshipProgramButton"]</button>
             </a>
         </div>
     </div>
 }
 
 <a asp-action="GetAllWorships" asp-route-year="@DateTime.Now.Year" type="button">
-    Посмотреть полный список богослужений
+    @Localizer["ShowAllWorships"]
 </a>
 <br />
 <br />
 
 
-<script>
+@* <script>
     function confirmDelete(worshipId) {
         if (!confirm("Are you sure you want to delete this worship?")) {
             return false;
@@ -92,5 +106,28 @@
 
         document.getElementById("deleteCode-" + worshipId).value = code;
         return true;
+    }
+</script>
+
+        @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+ *@
+<script>
+    // Inject localized strings into JavaScript variables
+    var confirmMessage = '@Localizer["DeleteWorshipConfirmationMessage"]';
+    var promptMessage = '@Localizer["DeleteWorshipPromptMessage"]';
+
+    function confirmDelete(worshipId) {
+        if (!confirm(confirmMessage)) {
+            return false;
+        }
+
+        let code = prompt(promptMessage);
+
+        if (code) {
+            document.getElementById("deleteCode-" + worshipId).value = code;
+            return true;
+        }
+
+        return false;
     }
 </script>

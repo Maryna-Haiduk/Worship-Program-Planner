@@ -70,12 +70,16 @@ namespace WorshipProgramPlannerApp.Controllers
 
             var worshipsDtos = worships.Select(c => new WorshipDTO()
             {
+                WorshipId = c.WorshipId,
+                
                 WorshipName = c.WorshipName,
                 WorshipDate = c.WorshipDate,
                 WorshipPrograms = c.WorshipPrograms.Select(v => new WorshipProgramDTO()
                 {
-                    Comment = v.Comment,
+                    WorshipId = v.WorshipProgramId,
+                    WorshipProgramId = v.WorshipProgramId,
                     PerformerName = v.PerformerName,
+                    Comment = v.Comment,
                     PoetryName = v.PoetryName,
                     SongName = v.SongName
                 }).ToList()
